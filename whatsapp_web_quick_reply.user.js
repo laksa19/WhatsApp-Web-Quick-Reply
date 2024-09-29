@@ -54,7 +54,7 @@
             link.innerText = config.text;
             link.style.padding = '5px';
             link.style.lineHeight = '20px';
-            link.style.backgroundColor = '#25D366';
+            link.style.backgroundColor = '#00a884';
             link.style.color = 'white';
             link.style.border = 'none';
             link.style.borderRadius = '7px';
