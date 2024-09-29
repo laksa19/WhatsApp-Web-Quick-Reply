@@ -4,8 +4,8 @@
 // @version      0.1
 // @description  WhatsApp Web Quick Reply V2
 // @author       Laksamadi Guko
-// @match        https://web.whatsapp.com/*
 // @icon         https://laksa19.github.io/WhatsApp-Web-Quick-Reply/favicon.png
+// @match        https://web.whatsapp.com/*
 // @grant        none
 // ==/UserScript==
 
