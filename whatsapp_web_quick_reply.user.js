@@ -28,7 +28,7 @@
 
 
     // Function to create and insert quick reply buttons
-        function insertQuickReplyButtons() {
+    function insertQuickReplyButtons() {
 
         // Check if the buttons already exist to avoid duplication
         if (document.getElementById('quickReplyButtonsContainer')) return;
@@ -42,7 +42,7 @@
         container.style.padding = '10px 0 5px 0';
         container.style.justifyContent = 'center';
         container.style.backgroundColor = 'var(--rich-text-panel-background)';
-        container.style.borderLeftColor = 'var(--border-stronger)';
+        container.style.borderLeft = '1px solid var(--border-stronger)';
 
         // Create and append each button based on the JSON configuration
         quickReplyConfig.forEach(config => {
