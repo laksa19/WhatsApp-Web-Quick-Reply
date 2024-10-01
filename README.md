@@ -12,9 +12,10 @@ WhatsApp Web Quick Reply
 ## How to use.
 
 
-### Edi config variable
+### Config form
 
-![image](https://github.com/user-attachments/assets/1e4f1e79-0c8a-41f1-9f37-87db35a6266f)
+![image](https://github.com/user-attachments/assets/7b30d395-bdff-400f-95d6-948e87fac83a)
+
 
 Refresh page after add or edit config.
 
