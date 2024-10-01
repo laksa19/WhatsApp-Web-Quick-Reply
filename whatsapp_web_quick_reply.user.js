@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
-// @version      0.2
+// @version      0.3
 // @description  WhatsApp Web Quick Reply V2
 // @author       Laksamadi Guko
 // @icon         https://laksa19.github.io/WhatsApp-Web-Quick-Reply/favicon.png
@@ -34,9 +34,19 @@
                     <label for="message">Message:</label>
                     <textarea style="color: var(--primary); background-color: var(--compose-input-border); margin-top:5px; width:100%; height:100px; resize:none; padding:9px 12px; outline:none; border-radius:10px; box-sizing: border-box;  border:none;" id="message" required></textarea>
                     <br><br>
+                    <div style="display:flex; justify-content: space-between;">
+                    <div>
                     <button style="padding: 10px; font-size: 0.875rem; font-weight: 500; line-height: 1.1429; background-color: var(--button-primary-background); color: var(--button-primary); border: none; border-radius: 24px; cursor: pointer; text-align: center; min-width: 35px;" type="submit">Add/Update</button>
+                    </div>
+                    <div>
+                    <button type="button" id="exportConfig" style="margin-right: 10px; padding: 10px; font-size: 0.875rem; font-weight: 500; line-height: 1.1429; background-color: var(--button-primary-background); color: var(--button-primary); border: none; border-radius: 24px; cursor: pointer;">Export Config</button>
+                    <button type="button" id="importConfig" style="padding: 10px; font-size: 0.875rem; font-weight: 500; line-height: 1.1429; background-color: var(--button-primary-background); color: var(--button-primary); border: none; border-radius: 24px; cursor: pointer;">Import Config</button>
+                    </div>
+                    </div>
                 </form>
                 <br>
+                <input type="file" id="importFileInput" style="display:none;">
+
                 <div id="tableQRContainer" style="overflow-y:auto;">
                 <table id="quickReplyTable" style="width:100%; border-collapse:collapse; color:var(--primary);">
                     <thead>
@@ -68,7 +78,7 @@
 
             if (!text || !message) {
                 alert("Text dan Message tidak boleh kosong!");
-                return; 
+                return;
             }
 
             const existingIndex = quickReplyConfig.findIndex(item => item.text === text);
@@ -89,6 +99,44 @@
 
         });
 
+        // Export configuration
+        document.getElementById('exportConfig').addEventListener('click', function () {
+            const blob = new Blob([JSON.stringify(quickReplyConfig, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'quickReplyConfig.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Import configuration
+        document.getElementById('importConfig').addEventListener('click', function () {
+            document.getElementById('importFileInput').click();
+        });
+
+        document.getElementById('importFileInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const importedConfig = JSON.parse(e.target.result);
+                    if (Array.isArray(importedConfig)) {
+                        quickReplyConfig = importedConfig;
+                        localStorage.setItem('quickReplyConfig', JSON.stringify(quickReplyConfig));
+                        renderTable();
+                        alert('Config successfully imported!');
+                    } else {
+                        alert('Invalid configuration format.');
+                    }
+                } catch (error) {
+                    alert('Error parsing JSON file.');
+                }
+            };
+            reader.readAsText(file);
+        });
 
         // Render table from config
         renderTable();
@@ -250,10 +298,6 @@
         let attachMenuButton = document.querySelector('span[data-icon="plus"]');
         if (attachMenuButton) {
             insertQuickReplyButtons();
-            document.getElementById('configForm').addEventListener('submit', function () {
-                // Listener tambahan, jalankan fungsi lain
-                insertQuickReplyButtons();
-            });
         }
     }
 
