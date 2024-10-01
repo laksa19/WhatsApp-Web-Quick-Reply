@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
-// @version      0.1
+// @version      0.2
 // @description  WhatsApp Web Quick Reply V2
 // @author       Laksamadi Guko
 // @icon         https://laksa19.github.io/WhatsApp-Web-Quick-Reply/favicon.png
@@ -62,26 +62,33 @@
         // Form submission for Add/Update
         document.getElementById('configForm').addEventListener('submit', function (event) {
             event.preventDefault();
-            const text = document.getElementById('text').value;
-            const message = document.getElementById('message').value;
 
-            // Find if text already exists, if so, update it, otherwise add new
-            const existingIndex = quickReplyConfig.findIndex(item => item.text === text);
-            if (existingIndex >= 0) {
-                quickReplyConfig[existingIndex].message = message;
-            } else {
-                quickReplyConfig.push({ text, message });
+            const text = document.getElementById('text').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!text || !message) {
+                alert("Text dan Message tidak boleh kosong!");
+                return; 
             }
 
-            // Save to localStorage
+            const existingIndex = quickReplyConfig.findIndex(item => item.text === text);
+            if (existingIndex >= 0) {
+                quickReplyConfig[existingIndex].message = message; // Update message if exist
+            } else {
+                quickReplyConfig.push({ text, message }); // Add new quick reply
+            }
+
+
             localStorage.setItem('quickReplyConfig', JSON.stringify(quickReplyConfig));
 
-            // Re-render table
+            // Render table after update
             renderTable();
 
-            // Clear form
+            // Reset form after submit
             document.getElementById('configForm').reset();
+
         });
+
 
         // Render table from config
         renderTable();
