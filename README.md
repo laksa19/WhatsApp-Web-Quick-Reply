@@ -12,19 +12,9 @@ WhatsApp Web Quick Reply
 ## How to use.
 
 
-### Edi textlist variable
+### Edi config variable
 
-```js
-const quickReplyConfig = [
-        {
-            text: "/hi",
-            expand: "Hi firend🙋‍♂️"
-        },
-        {
-            text: "test",
-            expand: "this is a test message,\n you can ignore it."
-        },
-    ]
-```
+![image](https://github.com/user-attachments/assets/1e4f1e79-0c8a-41f1-9f37-87db35a6266f)
 
-Note: add ```\n``` for new line
+Refresh page after add or edit config.
+
