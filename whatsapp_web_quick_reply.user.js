@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
-// @version      0.3
+// @version      0.4
 // @description  WhatsApp Web Quick Reply V2
 // @author       Laksamadi Guko
 // @icon         https://laksa19.github.io/WhatsApp-Web-Quick-Reply/favicon.png
@@ -77,7 +77,6 @@
             const message = document.getElementById('message').value.trim();
 
             if (!text || !message) {
-                alert("Text dan Message tidak boleh kosong!");
                 return;
             }
 
