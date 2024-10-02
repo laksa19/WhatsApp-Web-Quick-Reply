@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/whatsapp_web_quick_reply.user.js
-// @version      0.4
+// @version      0.5
 // @description  WhatsApp Web Quick Reply V2
 // @author       Laksamadi Guko
 // @icon         https://laksa19.github.io/WhatsApp-Web-Quick-Reply/favicon.png
@@ -22,6 +22,7 @@
 
     // Create modal HTML and inject into the DOM
     function createCrudModal() {
+        if (document.getElementById('crudModal')) return;
         const modalHTML = `
         <div id="crudModal" style="display:none; position:fixed; z-index:10000; left:0; top:0; width:100%; height:100%; background-color: rgba(0, 0, 0, 0.5);">
             <div style="background-color: var(--rich-text-panel-background); margin: 5% auto; padding: 20px; border-radius: 10px; width: 50%;">
