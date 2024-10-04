@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
-// @version      1.1
+// @version      1.2
 // @description  Scroll to bottom of pane-side on WhatsApp Web when Unread is clicked
 // @author       Laksamadi Guko
 // @match        https://web.whatsapp.com/*
@@ -19,7 +19,8 @@
     // Fungsi untuk scroll ke bawah
     function scrollToBottom() {
         const paneSide = document.getElementById("pane-side");
-        if (paneSide) {
+        const unreadChatList = localStorage.getItem("unreadChatList");
+        if (paneSide && unreadChatList) {
             paneSide.scrollTop = paneSide.scrollHeight;
         }
     }
@@ -37,11 +38,13 @@
         }
     }
 
-    // Event listener untuk tombol "Unread", "All", dan "Group"
+    // Event listener untuk tombol "Unread"
     document.body.addEventListener('click', function(e) {
         if (e.target && e.target.textContent.includes("Unread")) {
+            localStorage.setItem('unreadChatList',true);
             startScroll(); // Mulai scrolling otomatis jika "Unread" diklik
-        } else if (e.target && (e.target.textContent.includes("All") || e.target.textContent.includes("Groups") ||  e.target.textContent.includes("Favorites"))) {
+        } else {
+            localStorage.setItem('unreadChatList',false);
             stopScroll(); // Hentikan scrolling otomatis jika "All" atau "Group" diklik
         }
     });
