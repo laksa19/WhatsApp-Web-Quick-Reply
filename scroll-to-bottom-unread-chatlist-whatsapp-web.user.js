@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
-// @version      1.0
+// @version      1.1
 // @description  Scroll to bottom of pane-side on WhatsApp Web when Unread is clicked
 // @author       Laksamadi Guko
 // @match        https://web.whatsapp.com/*
