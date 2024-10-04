@@ -19,3 +19,7 @@ WhatsApp Web Quick Reply
 
 Refresh page after add or edit config.
 
+## Optional 
+
+Auto Scroll to Bottom on Unread chat list - WhatsApp Web
+[user script](https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js)
