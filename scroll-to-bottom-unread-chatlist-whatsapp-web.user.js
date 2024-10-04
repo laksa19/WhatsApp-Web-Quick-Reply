@@ -41,7 +41,7 @@
     document.body.addEventListener('click', function(e) {
         if (e.target && e.target.textContent.includes("Unread")) {
             startScroll(); // Mulai scrolling otomatis jika "Unread" diklik
-        } else if (e.target && (e.target.textContent.includes("All") || e.target.textContent.includes("Group"))) {
+        } else if (e.target && (e.target.textContent.includes("All") || e.target.textContent.includes("Groups") ||  e.target.textContent.includes("Favorites"))) {
             stopScroll(); // Hentikan scrolling otomatis jika "All" atau "Group" diklik
         }
     });
