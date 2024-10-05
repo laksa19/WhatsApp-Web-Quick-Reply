@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scroll to Bottom on Unread Click - WhatsApp Web
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Scroll to bottom of pane-side on WhatsApp Web when Unread is clicked
 // @author       Your Name
 // @match        https://web.whatsapp.com/*
@@ -42,11 +42,12 @@
             // Cek jika elemen induk dari Unread adalah <button> dengan aria-pressed="false"
             const parentButton = e.target.closest('button');
             if (parentButton && parentButton.getAttribute('aria-pressed') === "false") {
+                startScroll(); // Mulai scrolling otomatis jika Unread diklik dan aria-pressed="true"
             } else {
-                stopScroll();
+                stopScroll(); // Hentikan scroll jika aria-pressed="false"
             }
         } else {
-            stopScroll();
+            stopScroll(); // Hentikan scrolling otomatis jika "All" diklik
         }
     });
 })();
