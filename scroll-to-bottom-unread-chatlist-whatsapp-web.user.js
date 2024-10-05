@@ -1,33 +1,31 @@
 // ==UserScript==
-// @name         Scroll to Bottom on Unread - WhatsApp Web
-// @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
-// @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
-// @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
-// @version      1.2
+// @name         Scroll to Bottom on Unread Click - WhatsApp Web
+// @namespace    http://tampermonkey.net/
+// @version      1.3
 // @description  Scroll to bottom of pane-side on WhatsApp Web when Unread is clicked
-// @author       Laksamadi Guko
+// @author       Your Name
 // @match        https://web.whatsapp.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=whatsapp.com
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    let scrollInterval; // Menyimpan interval untuk scrolling
+    let scrollInterval = null; // Menyimpan interval untuk scrolling
 
     // Fungsi untuk scroll ke bawah
     function scrollToBottom() {
         const paneSide = document.getElementById("pane-side");
-        const unreadChatList = localStorage.getItem("unreadChatList");
-        if (paneSide && unreadChatList) {
+        if (paneSide) {
             paneSide.scrollTop = paneSide.scrollHeight;
         }
     }
 
     // Fungsi untuk memulai scroll otomatis menggunakan setInterval
     function startScroll() {
-        scrollInterval = setInterval(scrollToBottom, 1000); // Scroll setiap 1 detik
+        if (!scrollInterval) { // Jika scrollInterval belum berjalan
+            scrollInterval = setInterval(scrollToBottom, 500); // Scroll setiap 1 detik
+        }
     }
 
     // Fungsi untuk menghentikan scroll otomatis
@@ -40,12 +38,15 @@
 
     // Event listener untuk tombol "Unread"
     document.body.addEventListener('click', function(e) {
-        if (e.target && e.target.textContent.includes("Unread")) {
-            localStorage.setItem('unreadChatList',true);
-            startScroll(); // Mulai scrolling otomatis jika "Unread" diklik
+        if (e.target && e.target.textContent === "Unread") {
+            // Cek jika elemen induk dari Unread adalah <button> dengan aria-pressed="false"
+            const parentButton = e.target.closest('button');
+            if (parentButton && parentButton.getAttribute('aria-pressed') === "false") {
+            } else {
+                stopScroll();
+            }
         } else {
-            localStorage.setItem('unreadChatList',false);
-            stopScroll(); // Hentikan scrolling otomatis jika "All" atau "Group" diklik
+            stopScroll();
         }
     });
 })();
