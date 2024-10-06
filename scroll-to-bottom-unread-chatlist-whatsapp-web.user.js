@@ -3,7 +3,7 @@
 // @namespace    https://laksa19.github.io/WhatsApp-Web-Quick-Reply/
 // @downloadURL  https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
 // @updateURL    https://github.com/laksa19/WhatsApp-Web-Quick-Reply/raw/refs/heads/main/scroll-to-bottom-unread-chatlist-whatsapp-web.user.js
-// @version      1.6
+// @version      1.7
 // @description  Scroll to bottom of pane-side on WhatsApp Web when Unread is clicked
 // @author       Laksamadi Guko
 // @match        https://web.whatsapp.com/*
@@ -50,7 +50,7 @@
                 stopScroll(); // Hentikan scroll jika aria-pressed="false"
 
             }
-        } else {
+        } else if (e.target && e.target.textContent === "All" || e.target && e.target.textContent === "Favorites" || e.target && e.target.textContent === "Groups"){
             stopScroll(); // Hentikan scrolling otomatis jika "All" diklik
         }
     });
